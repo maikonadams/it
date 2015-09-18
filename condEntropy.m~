@@ -1,0 +1,32 @@
+function hxy = condEntropy(matx, maty)
+
+% mx is the margin of X
+% my is the margin of Y
+% jmat is the joint probabily matrix
+
+[jmat, mx, my] = jointProbab(matx, maty);
+
+[lengY , temp] = size(my);
+[lengX , temp] = size(mx);
+
+% calculating the joint entropy 
+% H(X|Y) = Sum{ p(Y=i)H(X | Y=i)}
+
+entropySum = 0;
+vecTemp = zeros(lengX);
+
+for jj=1:lengY
+
+vecTemp = jmat(jj,:)*(my(jj,1))^(-1);
+entropySum = entropySum + my(jj,1)*entropyVector(vecTemp);
+
+end;
+
+hxy = entropySum;
+
+
+
+
+
+
+end
